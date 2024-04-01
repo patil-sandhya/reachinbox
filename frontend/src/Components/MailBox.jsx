@@ -57,14 +57,16 @@ const MailBox = () => {
     document.addEventListener("keydown", handleKeyD);
   }, []);
 
+  const handleReplyBody = (e)=>{
+    setReplyObj((prev)=> ({...prev, body: e.target.innerText}))
+    console.log(replyObj)
+  }
+  
   const handleSendReply = () => {
-   
-    let getText = document.getElementById("replyVariable").innerText
-    setReplyObj(((prev)=> ({...prev, body: getText})))
-    setOpenEditor(false);
     console.log(replyObj)
     dispatch(sendReply(curThreadId,replyObj,config))
     //dispatch(getEmailList(config))
+    setOpenEditor(false);
   };
 
   const handleVariable = ()=>{
@@ -138,11 +140,10 @@ const MailBox = () => {
             <div className="border px-0 w-full border-gray-500"></div>
             <p className="text-gray-500 px-6 pt-4">Hi jeanne,</p>
             <div id="replyVariable"
-            onChange={(e) => setReplyObj((prev)=> ({...prev, body: e.target.innerText}))}
+            onInput={handleReplyBody}
               contentEditable="true"
-              //dangerouslySetInnerHTML={{ __html: replyObj.body }}
               className="py-2 px-6 h-1/2 focus:outline-none focus:border-gray-500"
-            >{replyObj.body}</div>
+            ></div>
             <div className="bottom-0 left-0 flex  space-x-2 p-4">
               <button className="px-4 flex py-2 bg-gradient-to-r from-blue-500 rounded to-blue-800 text-white" onClick={handleSendReply}>
                 Send

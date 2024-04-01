@@ -21,7 +21,7 @@ const Navbar = () => {
   const bgColor = theme == "dark" ? "bg-[#1F1F1F]" : "bg-white"
   const borderClr = theme == "dark" ? "border-gray-700" : "border-[#DEDEDE]"
   const btnBgClr = theme == "dark" ? "bg-gray-800" : "bg-[#DADEE1]"
-  console.log(theme, bgColor, textColor)
+  //console.log(theme, bgColor, textColor)
   return (
     <div className={`flex justify-between items-center h-16 w-full ${bgColor} ${textColor} 
     border-b ${borderClr}`}>

@@ -9,7 +9,7 @@ import { getEmailList, getThreadData, updateCurThread } from "../Redux/Action";
 const Inbox = () => {
   const allMailList = useSelector((store)=> store.listmail)
   const dummyThreadList = useSelector((store)=> store.dummyThreadList)
-  console.log(allMailList)
+ // console.log(allMailList)
   
   const token = useSelector((store)=> store.token)
   const dispatch = useDispatch()
@@ -28,7 +28,7 @@ const Inbox = () => {
     let filterData = dummyThreadList.filter((item)=>{
       return (item.threadId == threadId)
     })
-    console.log(threadId,filterData)
+    //console.log(threadId,filterData)
     dispatch(getThreadData(threadId,filterData))
   }
 
