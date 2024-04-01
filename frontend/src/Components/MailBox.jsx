@@ -7,6 +7,7 @@ import { IoMdFlash } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteThread, getEmailList, sendReply } from "../Redux/Action";
 import Alert from "./Alert";
+import ThreadCard from "./ThreadCard";
 
 const MailBox = () => {
   const curThreadId = useSelector((store) => store.curThreadId);
@@ -18,12 +19,14 @@ const MailBox = () => {
       Authorization: `Bearer ${token}`,
     },
   };
-
+  const currentDate = new Date();
   const [replyObj, setReplyObj] = useState({
-    from: "jeanne@icloud.com",
-    to: "peter@reachinbox.com",
+    fromEmail: "jeanne@icloud.com",
+    toEmail: "peter@reachinbox.com",
     subject:" Warmup Welcome",
+    toName:"",
     body:"",
+    sentAt:currentDate.toISOString()
   })
 
   const theme = useSelector((store) => store.theme);
@@ -55,10 +58,19 @@ const MailBox = () => {
   }, []);
 
   const handleSendReply = () => {
+    console.log(replyObj)
+    let getText = document.getElementById("replyVariable").innerText
+    setReplyObj(((prev)=> ({...prev, body: getText})))
+    setOpenEditor(false);
     dispatch(sendReply(curThreadId,replyObj,config))
-    dispatch(getEmailList(config))
+    //dispatch(getEmailList(config))
   };
 
+  const handleVariable = ()=>{
+    alert("variale set")
+    let getText = document.getElementById("replyVariable").innerHTML
+    setReplyObj(((prev)=> ({...prev, body: getText})))
+  }
   const handleReply = () => {
     setOpenEditor(true);
   };
@@ -81,7 +93,7 @@ const MailBox = () => {
         </div>
         <div className="flex w-[50%] justify-evenly items-center">
           <div
-            className={`flex justify-center items-center border ${borderClr} ${bgColor} bg-gray-900 p-2 rounded-lg`}
+            className={`flex justify-center items-center border ${borderClr} ${bgColor} p-2 rounded-lg`}
           >
             <span className="inline-block bg-yellow-400 w-5 h-5 rounded-full border-4 border-gray-700 mr-1"></span>
             <span className="text-sm">Meeting Completed</span>
@@ -124,17 +136,18 @@ const MailBox = () => {
             </p>
             <div className="border px-0 w-full border-gray-500"></div>
             <p className="text-gray-500 px-6 pt-4">Hi jeanne,</p>
-            <div
+            <div id="replyVariable"
             onChange={(e) => setReplyObj((prev)=> ({...prev, body: e.target.innerText}))}
-              contenteditable="true"
-              class="py-2 px-6 h-1/2 focus:outline-none focus:border-gray-500"
+              contentEditable="true"
+              //dangerouslySetInnerHTML={{ __html: replyObj.body }}
+              className="py-2 px-6 h-1/2 focus:outline-none focus:border-gray-500"
             >{replyObj.body}</div>
-            <div class="bottom-0 left-0 flex  space-x-2 p-4">
+            <div className="bottom-0 left-0 flex  space-x-2 p-4">
               <button className="px-4 flex py-2 bg-gradient-to-r from-blue-500 rounded to-blue-800 text-white" onClick={handleSendReply}>
                 Send
                 <FaCaretDown className="ml-4 mt-1" />
               </button>
-              <button className="px-4 flex py-2 text-white">
+              <button onClick={handleVariable} className="px-4 flex py-2 text-white">
                 <IoMdFlash className="mt-1 p-0 text-xl" />
                 Variables
               </button>
@@ -144,7 +157,11 @@ const MailBox = () => {
       )}
 
       <Alert isOpen={openAlert} onClose={closeAlert} />
-      <div className="relative mx-5">
+
+      {
+        (curThreadId == null) ? 
+        <>
+        <div className="relative mx-5">
         <div
           className={`w-full flex justify-center items-center ${textColor} mt-3`}
         >
@@ -160,6 +177,7 @@ const MailBox = () => {
         </div>
         <div className={`border absolute top-4 w-full ${borderClr}`}></div>
       </div>
+
       <div
         className={`w-[800px] h-[286px] border
       ${
@@ -201,7 +219,17 @@ const MailBox = () => {
         </div>
         <div className={`border absolute top-4 w-full ${borderClr}`}></div>
       </div>
-      <div className="p-5 mt-[276px] relative cursor-pointer">
+        </> : 
+        <>
+        {
+          curThreadData.map((item)=>{
+            return <ThreadCard id={item.id} {...item} />
+          })
+        }
+        </>
+      }
+      
+      <div className="p-5 mt-28 relative cursor-pointer">
         <MdReply color="white" className="absolute top-7 left-12" size={30} />
         <button
           onClick={handleReply}

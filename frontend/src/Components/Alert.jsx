@@ -1,8 +1,11 @@
 import React from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { deleteThread } from "../Redux/Action";
+
 const Alert = ({ isOpen, onClose }) => {
   const curThreadId = useSelector((store) => store.curThreadId);
+  const dummyThreadList = useSelector((store)=> store.dummyThreadList)
+   
   const dispatch = useDispatch();
   const token = useSelector((store) => store.token);
   const config = {
@@ -12,7 +15,10 @@ const Alert = ({ isOpen, onClose }) => {
   };
   if (!isOpen) return null;
   const handleDelete = ()=>{
-    dispatch(deleteThread(curThreadId, config));
+    let filterData = dummyThreadList.filter((item)=>{
+      return (item.threadId != curThreadId)
+    })
+    dispatch(deleteThread(curThreadId, filterData));
     onClose()
   }
 
