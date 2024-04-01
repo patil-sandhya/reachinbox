@@ -8,10 +8,11 @@ import { useDispatch } from "react-redux";
 const Home = () => {
   
   const dispatch = useDispatch()
-  //const {token} = useParams() 
-  // useEffect(()=>{
-  //   dispatch(updateToken(token))
-  // },[token])
+  let {token} = useParams() 
+ // console.log(token, "token")
+  useEffect(()=>{
+    dispatch(updateToken(token))
+  },[token])
 
   return (
     <div className="flex">

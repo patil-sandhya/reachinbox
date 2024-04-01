@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector,useDispatch } from "react-redux";
-import { deleteThread } from "../Redux/Action";
+import { deleteThread, getEmailList } from "../Redux/Action";
 
 const Alert = ({ isOpen, onClose }) => {
   const curThreadId = useSelector((store) => store.curThreadId);
@@ -15,10 +15,11 @@ const Alert = ({ isOpen, onClose }) => {
   };
   if (!isOpen) return null;
   const handleDelete = ()=>{
-    let filterData = dummyThreadList.filter((item)=>{
-      return (item.threadId != curThreadId)
-    })
-    dispatch(deleteThread(curThreadId, filterData));
+    // let filterData = dummyThreadList.filter((item)=>{
+    //   return (item.threadId != curThreadId)
+    // })
+    dispatch(deleteThread(curThreadId, config));
+    dispatch(getEmailList(config))
     onClose()
   }
 

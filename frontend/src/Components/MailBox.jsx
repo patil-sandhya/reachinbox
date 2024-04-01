@@ -20,13 +20,15 @@ const MailBox = () => {
     },
   };
   const currentDate = new Date();
+  currentDate.setHours(14);
+currentDate.setMinutes(5);
   const [replyObj, setReplyObj] = useState({
     fromEmail: "jeanne@icloud.com",
     toEmail: "peter@reachinbox.com",
     subject:" Warmup Welcome",
     toName:"",
     body:"",
-    sentAt:currentDate.toISOString()
+    sentAt:currentDate
   })
 
   const theme = useSelector((store) => store.theme);
@@ -61,11 +63,11 @@ const MailBox = () => {
     setReplyObj((prev)=> ({...prev, body: e.target.innerText}))
     console.log(replyObj)
   }
-  
+
   const handleSendReply = () => {
-    console.log(replyObj)
+    console.log(replyObj,curThreadId)
     dispatch(sendReply(curThreadId,replyObj,config))
-    //dispatch(getEmailList(config))
+    dispatch(getEmailList(config))
     setOpenEditor(false);
   };
 

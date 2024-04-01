@@ -19,7 +19,7 @@ let hours = date.getUTCHours();
 const minutes = date.getUTCMinutes();
 const ampm = hours >= 12 ? 'PM' : 'AM';
 hours = hours % 12;
-
+hours = hours ? hours : 12;
 const getDateInFormat = `${day} ${monthName} ${year} ${hours}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`;
 
   return (

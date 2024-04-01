@@ -11,13 +11,14 @@ export const updateToken = (newToken) => (dispatch)=>{
 }
 
 export const getEmailList = (config) => (dispatch) => {
-    // return axios.get(`https://hiring.reachinbox.xyz/api/v1/onebox/list`, config)
-    //   .then(res => {
-    //     dispatch({ type: GET_DATA, payload: res.data });
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   });
+    return axios.get(`https://hiring.reachinbox.xyz/api/v1/onebox/list`, config)
+      .then(res => {
+        console.log(res.data)
+        dispatch({ type: GET_DATA, payload: res.data.data });
+      })
+      .catch(err => {
+        console.log(err)
+      });
 };
 
 export const updateCurThread = (threadId)=> (dispatch)=>{
@@ -25,34 +26,37 @@ export const updateCurThread = (threadId)=> (dispatch)=>{
 }
 
 export const getThreadData = (id,config) => (dispatch) => {
-    dispatch({type: CURRENT_THREAD_DATA, payload: config})
-    // return axios.get(`https://hiring.reachinbox.xyz/api/v1/onebox/messages/${id}`, config)
-    //   .then(res => {
-    //     dispatch({ type: CURRENT_THREAD_DATA, payload: res.data });
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   });
+    //dispatch({type: CURRENT_THREAD_DATA, payload: config})
+    return axios.get(`https://hiring.reachinbox.xyz/api/v1/onebox/messages/${id}`, config)
+      .then(res => {
+        console.log(res.data)
+        dispatch({ type: CURRENT_THREAD_DATA, payload: res.data.data });
+      })
+      .catch(err => {
+        console.log(err)
+      });
 };
 
 export const deleteThread =(id,config) =>(dispatch)=>{
-  dispatch({type: DELETE_THREAD, payload: config})
-    // return axios.delete(`https://hiring.reachinbox.xyz/api/v1/onebox/messages/${id}`, config)
-    //   .then(res => {
-    //     console.log(res.data)
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   });
+  //dispatch({type: DELETE_THREAD, payload: config})
+    return axios.delete(`https://hiring.reachinbox.xyz/api/v1/onebox/messages/${id}`, config)
+      .then(res => {
+        dispatch({type: DELETE_THREAD})
+        console.log(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      });
 } 
 
 export const sendReply = (id,replyObj,config) =>(dispatch)=>{
-  dispatch({type: ADD_THREAD_REPLY, payload: replyObj})
-    // return axios.post(`https://hiring.reachinbox.xyz/api/v1/onebox/reply/${id}`,replyObj, config)
-    //   .then(res => {
-    //     console.log(res.data)
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   });
+  console.log(id)
+    return axios.post(`https://hiring.reachinbox.xyz/api/v1/onebox/reply/${id}`,replyObj, config)
+      .then(res => {
+        dispatch({type: ADD_THREAD_REPLY, payload: replyObj})
+        console.log(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      });
 }
