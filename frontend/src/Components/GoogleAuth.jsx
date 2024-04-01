@@ -17,7 +17,7 @@ const GoogleAuth = () => {
         </Link>
       </div>
       <div className="pt-7">
-        <Link to={"/home"}>
+        <Link>
         <button  className="bg-gradient-to-r from-blue-500 rounded to-blue-800 text-white w-48 py-3 px-6">
         Create an Account
         </button></Link>
