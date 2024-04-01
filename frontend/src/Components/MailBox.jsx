@@ -58,10 +58,11 @@ const MailBox = () => {
   }, []);
 
   const handleSendReply = () => {
-    console.log(replyObj)
+   
     let getText = document.getElementById("replyVariable").innerText
     setReplyObj(((prev)=> ({...prev, body: getText})))
     setOpenEditor(false);
+    console.log(replyObj)
     dispatch(sendReply(curThreadId,replyObj,config))
     //dispatch(getEmailList(config))
   };
