@@ -3,19 +3,30 @@ import { GoDotFill } from "react-icons/go";
 import { IoIosSend } from "react-icons/io";
 import { useSelector } from "react-redux";
 
-const InboxCards = () => {
+const InboxCards = ({threadId, toEmail, subject,sentAt, handleSingleThread}) => {
+  const date = new Date(sentAt);
+
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+const formattedDate = monthNames[date.getUTCMonth()] + ' ' + date.getUTCDate();
+
   const theme = useSelector((store)=> store.theme)
   const bgColor = theme == "dark" ? "bg-gray-800" : "bg-[#DFE3E8]"
   const borderClr = theme == "dark" ? "border-gray-700" : "border-white"
   const textColor = theme == "dark" ? "text-white" : "text-[#343A40]"
 
+  const handleCurThread = ()=>{
+    handleSingleThread(threadId)
+  }
+
   return (
-    <div className={`${textColor} w-full max-w-md flex flex-col justify-center border-b ${borderClr} p-4`}>
+    <div onClick={handleCurThread} className={`${textColor} cursor-pointer w-full max-w-md flex flex-col justify-center border-b ${borderClr} p-4`}>
       <div className='flex justify-between items-center'>
-        <h1 className='font-bold'>Beata@gmail.com</h1>
-        <p className='text-[#919EAB]'>Mar 7</p>
+        <h1 className='font-semibold'>{toEmail}</h1>
+        <p className='text-[#919EAB]'>{formattedDate}</p>
       </div>
-      <p className='text-sm'>I've tried a lot and.</p>
+      <p className='text-sm'>{subject}.</p>
       <div className='flex items-center mt-4'>
         <button className={`flex justify-center items-center ${bgColor} py-1 px-4 rounded-2xl mr-4 lin`}>
           <GoDotFill/><span className='ml-1 text-xs'>Interested</span>

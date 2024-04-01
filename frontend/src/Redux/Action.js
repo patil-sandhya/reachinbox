@@ -25,13 +25,14 @@ export const updateCurThread = (threadId)=> (dispatch)=>{
 }
 
 export const getThreadData = (id,config) => (dispatch) => {
-    return axios.get(`https://hiring.reachinbox.xyz/api/v1/onebox/messages/${id}`, config)
-      .then(res => {
-        dispatch({ type: CURRENT_THREAD_DATA, payload: res.data });
-      })
-      .catch(err => {
-        console.log(err)
-      });
+    dispatch({type: CURRENT_THREAD_DATA, payload: config})
+    // return axios.get(`https://hiring.reachinbox.xyz/api/v1/onebox/messages/${id}`, config)
+    //   .then(res => {
+    //     dispatch({ type: CURRENT_THREAD_DATA, payload: res.data });
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   });
 };
 
 export const deleteThread =(id,config) =>(dispatch)=>{
