@@ -3,7 +3,7 @@
 - User can login using google account
 - Switch theme light or dark
 - Shortcut key for delete and open reply box , "D" & "R" respectively
-- Add variales in reply
+- Add variables in reply
 - CRUD Operation on thread
 - Dynamically display thread data along with sending time and date
 
