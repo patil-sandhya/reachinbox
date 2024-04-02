@@ -25,7 +25,7 @@ const getDateInFormat = `${day} ${monthName} ${year} ${hours}:${minutes < 10 ? '
   return (
     
     <>
-    <div className="relative mx-5 h-auto">
+    <div className="relative mx-5 h-auto ">
     <div
       className={`w-full flex justify-center items-center ${textColor} mt-3`}
     >
@@ -43,7 +43,7 @@ const getDateInFormat = `${day} ${monthName} ${year} ${hours}:${minutes < 10 ? '
   </div>
 
   <div
-    className={`w-[800px] h-auto border
+    className={`w-9/10 h-auto border
   ${
     theme == "dark"
       ? "bg-[#141517] border-gray-800 text-[#F8FAFC]"

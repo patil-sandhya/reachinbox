@@ -58,7 +58,7 @@ const Sidebar = () => {
           className="mt-12 hover:bg-gray-700 hover:p-1 rounded text-gray-400"
         />
       </div>
-        <div className="text-white text-xl bg-green-900 rounded-full flex justify-center items-center h-9 w-9 mt-[260px] mt-auto">AS</div>
+        <div className="text-white text-xl bg-green-900 rounded-full flex justify-center items-center h-9 w-9 mt-36">AS</div>
     </div>
   );
 };

@@ -17,12 +17,14 @@ const AllMail = () => {
       <Sidebar />
       <div className="w-full">
         <Navbar />
-        <div className={`${bgColor} w-full flex`} style={{ minHeight: "calc(100vh - 64px)" }}>
+        <div className={`${bgColor} w-full flex`}>
+        <div div className='w-1/5 px-3'>
             <AllInbox />
-          <div  className={`border-r border-l ${borderClr}`} style={{ minHeight: "calc(100vh - 64px)" }}>
+            </div>
+          <div  className={`border-r border-l ${borderClr} w-3/5`} style={{ minHeight: "calc(100vh - 64px) " }}>
             <MailBox/>
           </div>
-          <div className="w-full" style={{ minHeight: "calc(100vh - 64px)" }}>
+          <div className="w-1/5" style={{ minHeight: "calc(100vh - 64px)" }}>
             <LeadSidebar/>
           </div>
         </div>

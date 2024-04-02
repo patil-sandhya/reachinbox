@@ -1,9 +1,21 @@
 import { ADD_THREAD_REPLY, CHANGE_THEME, CURRENT_THREAD, CURRENT_THREAD_DATA, DELETE_THREAD, GET_DATA, GET_TOKEN } from "./ActionType";
 import axios from "axios";
 
+
 export const switchTheme = (newTheme) => (dispatch)=>{
     console.log("new theme", newTheme)
     dispatch({type: CHANGE_THEME, payload:newTheme})
+}
+
+export const resetData =(config)=> ()=>{
+ return axios.get('https://hiring.reachinbox.xyz/api/v1/onebox/reset',config).then(res => {
+    console.log(res.data)
+    
+  })
+  .catch(err => {
+    console.log(err)
+    alert("Something went wrong! Unable to reset data")
+  });
 }
 
 export const updateToken = (newToken) => (dispatch)=>{
@@ -26,7 +38,7 @@ export const updateCurThread = (threadId)=> (dispatch)=>{
 }
 
 export const getThreadData = (id,config) => (dispatch) => {
-    //dispatch({type: CURRENT_THREAD_DATA, payload: config})
+    console.log(id)
     return axios.get(`https://hiring.reachinbox.xyz/api/v1/onebox/messages/${id}`, config)
       .then(res => {
         console.log(res.data)
@@ -58,5 +70,6 @@ export const sendReply = (id,replyObj,config) =>(dispatch)=>{
       })
       .catch(err => {
         console.log(err)
+        alert("Server error! something went wrong")
       });
 }
