@@ -29,7 +29,8 @@
 7. Theme - Users can switch between dark and light themes, even on the homepage. <hr>
    ![Screenshot (907)](https://github.com/patil-sandhya/reachinbox/assets/117443062/4f0e723b-ded2-4ca8-9aef-ff12a882d61d)
 
-
+## Note - 
+In the event that the reply API link is non-functional, sending replies will be affected. Once the API is operational, replies can be successfully transmitted.
 ## Set Up Project 
 - git clone https://github.com/patil-sandhya/reachinbox.git
 - cd frontend
